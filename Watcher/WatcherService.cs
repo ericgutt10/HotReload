@@ -38,9 +38,10 @@ namespace Watcher
                 await Task.Yield();
 
                 // Make a file watcher for the project
-                var watcher = new FileSystemWatcher(_options.ProjectPath, "*.cs")
+                var watcher = new FileSystemWatcher(_options.ClientProjectPath, "*.*")
                 {
-                    EnableRaisingEvents = true
+                    EnableRaisingEvents = true,
+                    IncludeSubdirectories = true
                 };
 
                 var noopLifetime = new NoopHostLifetime();

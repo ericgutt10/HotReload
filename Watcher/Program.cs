@@ -9,9 +9,13 @@ namespace Watcher
 {
     public class Program
     {
-        static readonly string ProjectName = "SampleApplication";
-        static readonly string ProjectPath = Path.GetFullPath(@"..\SampleApplication\");
-        static readonly string DllPath = Path.Combine(ProjectPath, @"bin\Debug\netcoreapp3.0\SampleApplication.dll");
+        static readonly string ClientProjectName = "BlazorScratch01";
+        static readonly string ProjectName = @"BlazorScratchServer01";
+        static readonly string TargetFrameWork = "netcoreapp3.0";
+
+        static readonly string ProjectPath = Path.GetFullPath($@"..\{ProjectName}\");
+        static readonly string ClientProjectPath = Path.GetFullPath($@"..\{ClientProjectName}\");
+        static readonly string DllPath = Path.Combine(ProjectPath, $@"bin\Debug\{TargetFrameWork}\{ProjectName}.dll");
 
         public static void Main(string[] args)
         {
@@ -30,6 +34,8 @@ namespace Watcher
 
                         services.Configure<ProjectOptions>(o =>
                         {
+                            o.ClientProjectName = ClientProjectName;
+                            o.ClientProjectPath = ClientProjectPath;
                             o.ProjectName = ProjectName;
                             o.ProjectPath = ProjectPath;
                             o.DllPath = DllPath;
