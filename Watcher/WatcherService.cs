@@ -56,6 +56,8 @@ namespace Watcher
 
                     var projectAssembly = loadContext.LoadFromAssemblyName(AssemblyName.GetAssemblyName(_options.DllPath));
 
+                    using var reflection = AssemblyLoadContext.EnterContextualReflection(projectAssembly);
+
                     var type = projectAssembly.GetType($"{_options.ProjectName}.Program");
                     var createHostBuilderMethodInfo = type.GetMethod("CreateHostBuilder", BindingFlags.Static | BindingFlags.Public);
 
